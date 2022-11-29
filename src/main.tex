@@ -1,0 +1,146 @@
+\documentclass[aspectratio=169]{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set Helvetica Font in Text and Math in LaTeX %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[helvet]{sfmath}
+\usepackage[scaled=1]{helvet}
+\usepackage[T1]{fontenc}
+\renewcommand\familydefault{\sfdefault} 
+\everymath={\sf}
+\usepackage{fontspec}
+
+\usepackage{subcaption}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+%    pdfpagemode=FullScreen,
+}
+
+% use settings files
+\input{configuration_files/beamer_theme.tex}
+\input{configuration_files/quotations.tex}
+
+% Other packages
+\usepackage{enumitem}
+\setitemize{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item}}
+
+\usepackage{amssymb}
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}
+
+\usepackage{datetime}
+\newdateformat{specialdate}{\twodigit{\THEDAY} \ \monthname[\THEMONTH] \THEYEAR}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\nologo}{\setbeamertemplate{logo}{}}
+\newcommand{\yeslogo}{\logo{\vspace{-0.5cm}\includegraphics[width=1.5cm]{./images/HR_logo_hringur_lowres}\hspace{0.5cm}}}
+
+\yeslogo
+
+\newif\ifpause
+\pausetrue
+%\pausefalse
+\newcommand{\mypause}{\ifpause \pause \fi}
+
+%Information to be included in the title page:
+\title{Autonomous Drone Landing with Fiducial Markers\\and a Gimbal-Mounted Camera for Active Tracking}
+\author{Joshua Springer}
+\institute{Reykjavik University\\Department of Computer Science}
+
+\date{\specialdate\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Fiducial Markers}
+	\vspace*{\fill}
+	\begin{figure}[]
+	    \centering
+	    \begin{subfigure}[b]{0.2\linewidth}
+		\includegraphics[width=\textwidth]{./images/tagCustom48h12_00002_00001_00000}
+		\caption{April Tag 48h12}
+		\label{figure:apriltag48h12}
+	    \end{subfigure}
+		\hspace{0.05\linewidth}
+	    \begin{subfigure}[b]{0.2\linewidth}
+		\includegraphics[width=\textwidth]{./images/tagCustom24h10_00002_00001_00000}
+		\caption{April Tag 24h10}
+		\label{figure:apriltag24h10}
+	    \end{subfigure}
+		\hspace{0.05\linewidth}
+	    \begin{subfigure}[b]{0.2\linewidth}
+		\includegraphics[width=\textwidth]{./images/whycode_20_8}
+		\caption{WhyCode (Orig)}
+		\label{figure:whycode_single}
+	    \end{subfigure}
+		\hspace{0.05\linewidth}
+	    \begin{subfigure}[b]{0.2\linewidth}
+		\includegraphics[width=\textwidth]{./images/whycode_multi}
+		\caption{WhyCode Multi}
+		\label{figure:whycode_bundle}
+	    \end{subfigure}
+	    \label{figure:marker_setup}
+	\end{figure}
+	\vspace*{\fill}
+\end{frame}
+
+\begin{frame}{The Downward-facing Camera Axiom}
+\end{frame}
+
+\begin{frame}{Orientation Ambiguity}
+\end{frame}
+
+\begin{frame}{Testing Platform: DJI Spark}
+	DJI Mobile SDK
+\end{frame}
+
+\begin{frame}{Testing Platform Limitations/Workarounds}
+\end{frame}
+
+\begin{frame}{Example Tracking Performance}
+\end{frame}
+
+\begin{frame}{Example Landing Trajectory}
+\end{frame}
+
+\begin{frame}{Example Control Outputs}
+\end{frame}
+
+\begin{frame}{Erroneous Control Outputs}
+\end{frame}
+
+\begin{frame}{Erroneous Landing Trajectory}
+\end{frame}
+
+\begin{frame}{Landing Radii}
+\end{frame}
+
+\begin{frame}{Future Work}
+\end{frame}
+
+\begin{frame}{Main Messages}
+	\begin{itemize}
+		\item \emph{Actuated}, gimbal-mounted camera
+			\mypause $\rightarrow$ easier to search for the landing pad.
+		\mypause\item Orientation ambiguity, discontinuities
+			\mypause $\rightarrow$ pose estimation is harder.
+		\mypause\item Autonomous precision landing still possible
+			\mypause but can be improved.
+	\end{itemize}
+\end{frame}
+
+
+%\begin{frame}{}
+%\end{frame}
+
+\end{document}
