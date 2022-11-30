@@ -39,6 +39,7 @@
 
 \usepackage{datetime}
 \newdateformat{specialdate}{\twodigit{\THEDAY} \ \monthname[\THEMONTH] \THEYEAR}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\nologo}{\setbeamertemplate{logo}{}}
@@ -52,9 +53,9 @@
 \newcommand{\mypause}{\ifpause \pause \fi}
 
 %Information to be included in the title page:
-\title{Autonomous Drone Landing with Fiducial Markers\\and a Gimbal-Mounted Camera for Active Tracking}
+\title{Autonomous Multirotor Landing on Landing Pads\\and Lava Flows}
 \author{Joshua Springer}
-\institute{Reykjavik University\\Department of Computer Science}
+\institute{Reykjavik University\\Department of Computer Science\\Supervisor: Marcel Kyas}
 
 \date{\specialdate\today}
 
@@ -62,85 +63,46 @@
 
 \maketitle
 
-\begin{frame}{Fiducial Markers}
-	\vspace*{\fill}
-	\begin{figure}[]
-	    \centering
-	    \begin{subfigure}[b]{0.2\linewidth}
-		\includegraphics[width=\textwidth]{./images/tagCustom48h12_00002_00001_00000}
-		\caption{April Tag 48h12}
-		\label{figure:apriltag48h12}
-	    \end{subfigure}
-		\hspace{0.05\linewidth}
-	    \begin{subfigure}[b]{0.2\linewidth}
-		\includegraphics[width=\textwidth]{./images/tagCustom24h10_00002_00001_00000}
-		\caption{April Tag 24h10}
-		\label{figure:apriltag24h10}
-	    \end{subfigure}
-		\hspace{0.05\linewidth}
-	    \begin{subfigure}[b]{0.2\linewidth}
-		\includegraphics[width=\textwidth]{./images/whycode_20_8}
-		\caption{WhyCode (Orig)}
-		\label{figure:whycode_single}
-	    \end{subfigure}
-		\hspace{0.05\linewidth}
-	    \begin{subfigure}[b]{0.2\linewidth}
-		\includegraphics[width=\textwidth]{./images/whycode_multi}
-		\caption{WhyCode Multi}
-		\label{figure:whycode_bundle}
-	    \end{subfigure}
-	    \label{figure:marker_setup}
-	\end{figure}
-	\vspace*{\fill}
-\end{frame}
+\nologo
 
-\begin{frame}{The Downward-facing Camera Axiom}
-\end{frame}
-
-\begin{frame}{Orientation Ambiguity}
-\end{frame}
-
-\begin{frame}{Testing Platform: DJI Spark}
-	DJI Mobile SDK
-\end{frame}
-
-\begin{frame}{Testing Platform Limitations/Workarounds}
-\end{frame}
-
-\begin{frame}{Example Tracking Performance}
-\end{frame}
-
-\begin{frame}{Example Landing Trajectory}
-\end{frame}
-
-\begin{frame}{Example Control Outputs}
-\end{frame}
-
-\begin{frame}{Erroneous Control Outputs}
-\end{frame}
-
-\begin{frame}{Erroneous Landing Trajectory}
-\end{frame}
-
-\begin{frame}{Landing Radii}
-\end{frame}
-
-\begin{frame}{Future Work}
-\end{frame}
-
-\begin{frame}{Main Messages}
+\begin{frame}{Topic Overview}
 	\begin{itemize}
-		\item \emph{Actuated}, gimbal-mounted camera
-			\mypause $\rightarrow$ easier to search for the landing pad.
-		\mypause\item Orientation ambiguity, discontinuities
-			\mypause $\rightarrow$ pose estimation is harder.
-		\mypause\item Autonomous precision landing still possible
-			\mypause but can be improved.
+		\item Autonomous drone landing: hard, needs to be precise
+		\item Often depends on GPS, blind to obstacles
+		\item Often needs to be more precise than GPS (or GPS-denied)
+		\item Landing pads: fiducial markers
+		\item Terrain relative navigation
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Landing Pads with Fiducial Markers}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{./images/wubben_drone}
+		\caption{Classic, downward-facing, fixed camera.~\cite{accurate_landing_UAV_ground_pattern}}
+		\label{figure:downward_facing_fixed_camera}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+	\begin{itemize}
+		\item Fixed, downward-facing camera paradigm
+		\item Loses sight of the landing pad in adverse conditions (e.g. wind)
+	\end{itemize}
+	\end{column}
+\end{columns}
+\end{frame}
 
-%\begin{frame}{}
-%\end{frame}
+\begin{frame}{Example Depth Image Processing}
+	\centering
+	\includegraphics[height=\textheight]{./images/depth_processing_screenshot}
+\end{frame}
+
+\begin{frame}{References}
+	\setbeamertemplate{bibliography item}[triangle]
+	\bibliographystyle{plain}
+	\bibliography{references}
+\end{frame}
 
 \end{document}
