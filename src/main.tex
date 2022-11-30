@@ -167,9 +167,86 @@
 	\includegraphics[height=\textheight]{./images/tracking_example}
 \end{frame}
 
+\begin{frame}{Trajectory and Control Signals}
+    \centering
+    \includegraphics[width=0.49\textwidth]{./images/landing_trajectory}
+    \includegraphics[width=0.49\textwidth]{./images/control_example}
+\end{frame}
+
+\begin{frame}{Trajectory and Control Signals (With Discontinuities)}
+    \centering
+    \includegraphics[width=0.49\textwidth]{./images/landing_trajectory_with_discontinuities}
+    \includegraphics[width=0.49\textwidth]{./images/control_example_with_discontinuities}
+\end{frame}
+
+\begin{frame}{Overall Performance}
+	\centering
+	\includegraphics[height=\textheight]{./images/violin_plot_landing_radii}
+\end{frame}
+
+\begin{frame}{RAVEN, Mars Analog Missions in Iceland}
+	\centering
+	\includegraphics[height=0.6\textheight]{./images/raven_rover_drone}
+	\includegraphics[height=0.6\textheight]{./images/dreki_small_tents_snow}
+\end{frame}
+
+\begin{frame}{Lava Flow Landings}
+	\centering
+	\includegraphics[width=0.49\textwidth]{./images/holuhraun_smooth}
+	\includegraphics[width=0.49\textwidth]{./images/holuhraun_rough}
+\end{frame}
+
+\section{Moving Forward}
+
+\begin{frame}{More Fiducial Tests}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+	\begin{itemize}
+		\item Re-conduct fiducial landing tests with actuated camera
+		\item Raw pose data (same as before)
+		\item Filtered pose data (KF, etc)
+		\item Hybrid data
+		\begin{itemize}
+			\item Position from marker
+			\item Orientation from camera gimbal
+		\end{itemize}
+	\end{itemize}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./images/phantom_3}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Lava Flow Landing: Stóra-Bolluhraun}
+	\centering
+	\includegraphics[height=0.65\textheight]{./images/reykjavik_university_no_fly_zone}
+	\includegraphics[height=0.65\textheight]{./images/depth_drone_flying}
+\end{frame}
+
 \begin{frame}{Example Depth Image Processing}
 	\centering
 	\includegraphics[height=\textheight]{./images/depth_processing_screenshot}
+\end{frame}
+
+\begin{frame}{Main Messages}
+\begin{columns}
+	\begin{column}{0.4\textwidth}
+		\includegraphics[width=\textwidth]{./images/depth_drone_flying}
+	\end{column}
+	\begin{column}{0.6\textwidth}
+	\begin{itemize}
+		\item Topic: autonomous drone control: landing
+		\item Methods:
+		\begin{itemize}
+			\item Fiducial markers with camera actuation
+			\item Lava flow landings: terrain analysis with RGBD camera + IMU
+			\item Embedded processing only, no active ground infrastructure
+		\end{itemize}
+	\item Are there any questions?
+	\end{itemize}
+	\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{References}
