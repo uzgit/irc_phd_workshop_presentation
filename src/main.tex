@@ -3,6 +3,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
 
+\usepackage[backend=biber,bibencoding=utf8,style=verbose-inote,citestyle=authoryear]{biblatex}
+\bibliography{references}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Set Helvetica Font in Text and Math in LaTeX %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,6 +26,13 @@
     pdftitle={Overleaf Example},
 %    pdfpagemode=FullScreen,
 }
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = false,
+    linkbordercolor = {white}
+}
+
 
 % use settings files
 \input{configuration_files/beamer_theme.tex}
@@ -57,7 +67,7 @@
 \author{Joshua Springer}
 \institute{Reykjavik University\\Department of Computer Science\\Supervisor: Marcel Kyas}
 
-\date{\specialdate\today}
+\date{7 December 2022}
 
 \begin{document}
 
@@ -71,9 +81,10 @@
 		\item Often depends on GPS, blind to obstacles
 		\item Often needs to be more precise than GPS (or GPS-denied)
 		\item Landing pads: fiducial markers
-		\item Terrain relative navigation
+		\item Terrain analysis
 		\item Aesthetics:
 		\begin{itemize}
+			\item GPS-independent
 			\item Embedded processing only $\rightarrow$ efficient, quick, dedicated hardware
 			\item No active ground infrastructure (e.g.~ground stations with telemetry, computing hardware)
 			\item Prefer passive sensors (e.g.~RGBD cameras instead of LIDAR/RADAR)
@@ -81,44 +92,46 @@
 	\end{itemize}
 \end{frame}
 
-\section{Progress So Far}
+\section{Structured Case: Landing Pads}
 
 \begin{frame}{Fiducial Markers}
-	\vspace*{\fill}
-	\begin{figure}[]
-	    \centering
-	    \begin{subfigure}[b]{0.23\linewidth}
-		\includegraphics[width=\textwidth]{./images/tagCustom48h12_00002_00001_00000}
-		    \caption{April Tag 48h12~\cite{apriltag3_paper}}
-		\label{figure:apriltag48h12}
-	    \end{subfigure}
-		\hspace{0.01\linewidth}
-	    \begin{subfigure}[b]{0.23\linewidth}
-		\includegraphics[width=\textwidth]{./images/tagCustom24h10_00002_00001_00000}
-		    \caption{April Tag 24h10~\cite{fiducial_precursor_evaluation}}
-		\label{figure:apriltag24h10}
-	    \end{subfigure}
-		\hspace{0.01\linewidth}
-	    \begin{subfigure}[b]{0.23\linewidth}
-		\includegraphics[width=\textwidth]{./images/whycode_20_8}
-		    \caption{WhyCode (Orig)\cite{whycode_paper}}
-		\label{figure:whycode_single}
-	    \end{subfigure}
-		\hspace{0.01\linewidth}
-	    \begin{subfigure}[b]{0.23\linewidth}
-		\includegraphics[width=\textwidth]{./images/whycode_multi}
-		    \caption{WhyCode Multi~\cite{fiducial_precursor_evaluation}}
-		\label{figure:whycode_bundle}
-	    \end{subfigure}
-	    \label{figure:marker_setup}
-	\end{figure}
-	\mypause
-%	\vspace{1cm}
-	\begin{itemize}
-		\item Marker \emph{position} $\rightarrow$ accurate
-		\item Marker \emph{orientation} $\rightarrow$ ambiguous
-	\end{itemize}
-	\vspace*{\fill}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+	\centering
+	\begin{tabular}{cc}
+		\includegraphics[width=2cm]{./images/tagCustom48h12_00002_00001_00000}
+		&
+		\includegraphics[width=2cm]{./images/tagCustom24h10_00002_00001_00000}
+		\\
+		April Tag 48h12%~\footcite{apriltag3_paper}
+		&
+		April Tag 24h10%~\cite{fiducial_precursor_evaluation}
+		\\
+		\includegraphics[width=2cm]{./images/whycode_20_8}
+		&
+		\includegraphics[width=2cm]{./images/whycode_multi}
+		\\
+		WhyCode (Orig)%\cite{whycode_paper}
+		&
+		WhyCode Multi%~\cite{fiducial_precursor_evaluation}
+	\end{tabular}
+\end{column}
+\begin{column}{0.5\textwidth}
+	\centering
+	\includegraphics[width=\linewidth]{images/orbit-left-right-3_apriltag48h12_position-target}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Discontinuities}
+	\centering
+	\includegraphics[width=0.75\linewidth]{images/orbit-left-right-4_apriltag48h12_position-target}
+\end{frame}
+
+\begin{frame}{Evaluation Results}
+    \centering
+    \includegraphics[width=0.49\linewidth]{./images/violin_plot_five_member}
+    \includegraphics[width=0.49\linewidth]{./images/violin_plot_speed_five_member}
 \end{frame}
 
 \begin{frame}{Landing Pads with Fiducial Markers}
@@ -140,65 +153,35 @@
 \end{columns}
 \end{frame}
 
-\begin{frame}{Example Test Case}
-	\centering
-	\includegraphics[width=0.75\linewidth]{images/orbit-left-right-3_apriltag48h12_position-target}
-\end{frame}
-
-\begin{frame}{Example Test Case with Discontinuities}
-	\centering
-	\includegraphics[width=0.75\linewidth]{images/orbit-left-right-4_apriltag48h12_position-target}
-\end{frame}
-
-\begin{frame}{Results}
-    \centering
-    \includegraphics[width=0.49\linewidth]{./images/violin_plot_five_member}
-    \includegraphics[width=0.49\linewidth]{./images/violin_plot_speed_five_member}
-\end{frame}
-
 \begin{frame}{Proof of Concept Landing with Actuated Camera}
-    \centering
-    \includegraphics[height=0.55\textheight]{./images/dji_spark}
-    \includegraphics[height=0.55\textheight]{./images/tablet_screenshot}
-\end{frame}
-
-\begin{frame}{Tracking Performance Example}
 	\centering
-	\includegraphics[height=\textheight]{./images/tracking_example}
+	\includegraphics[height=0.55\textheight]{./images/dji_spark}
+	\includegraphics[height=0.55\textheight]{./images/tablet_screenshot}
+	\href{run:./autonomous_landing_demonstration_short.mp4}{Demonstration Video}
 \end{frame}
 
-\begin{frame}{Trajectory and Control Signals}
-    \centering
-    \includegraphics[width=0.49\textwidth]{./images/landing_trajectory}
-    \includegraphics[width=0.49\textwidth]{./images/control_example}
-\end{frame}
-
-\begin{frame}{Trajectory and Control Signals (With Discontinuities)}
-    \centering
-    \includegraphics[width=0.49\textwidth]{./images/landing_trajectory_with_discontinuities}
-    \includegraphics[width=0.49\textwidth]{./images/control_example_with_discontinuities}
-\end{frame}
-
-\begin{frame}{Overall Performance}
-	\centering
-	\includegraphics[height=\textheight]{./images/violin_plot_landing_radii}
-\end{frame}
-
-\begin{frame}{RAVEN, Mars Analog Missions in Iceland}
-	\centering
-	\includegraphics[height=0.6\textheight]{./images/raven_rover_drone}
-	\includegraphics[height=0.6\textheight]{./images/dreki_small_tents_snow}
-\end{frame}
-
-\begin{frame}{Lava Flow Landings}
-	\centering
-	\includegraphics[width=0.49\textwidth]{./images/holuhraun_smooth}
-	\includegraphics[width=0.49\textwidth]{./images/holuhraun_rough}
-\end{frame}
-
-\section{Moving Forward}
-
-\begin{frame}{More Fiducial Tests}
+%\begin{frame}{Tracking Performance Example}
+%	\centering
+%	\includegraphics[height=\textheight]{./images/tracking_example}
+%\end{frame}
+%
+%\begin{frame}{Trajectory and Control Signals}
+%    \centering
+%    \includegraphics[width=0.49\textwidth]{./images/landing_trajectory}
+%    \includegraphics[width=0.49\textwidth]{./images/control_example}
+%\end{frame}
+%
+%\begin{frame}{Trajectory and Control Signals (With Discontinuities)}
+%    \centering
+%    \includegraphics[width=0.49\textwidth]{./images/landing_trajectory_with_discontinuities}
+%    \includegraphics[width=0.49\textwidth]{./images/control_example_with_discontinuities}
+%\end{frame}
+%
+%\begin{frame}{Overall Performance}
+%	\centering
+%	\includegraphics[height=\textheight]{./images/violin_plot_landing_radii}
+%\end{frame}
+\begin{frame}{Future Work: Fiducial Tests}
 \begin{columns}
 	\begin{column}{0.5\textwidth}
 	\begin{itemize}
@@ -218,15 +201,58 @@
 \end{columns}
 \end{frame}
 
-\begin{frame}{Lava Flow Landing: Stóra-Bolluhraun}
+\section{Unstructured Case: Lava Flows}
+
+\begin{frame}{RAVEN, Mars Analog Missions in Iceland}
 	\centering
-	\includegraphics[height=0.65\textheight]{./images/reykjavik_university_no_fly_zone}
-	\includegraphics[height=0.65\textheight]{./images/depth_drone_flying}
+	\includegraphics[width=10cm]{./images/raven_rover_drone}
+%	\includegraphics[height=0.6\textheight]{./images/dreki_small_tents_snow}
 \end{frame}
 
-\begin{frame}{Example Depth Image Processing}
+\begin{frame}{RAVEN, Mars Analog Missions in Iceland}
 	\centering
-	\includegraphics[height=\textheight]{./images/depth_processing_screenshot}
+	\includegraphics[height=0.55\textheight]{./images/holuhraun_aerial}
+	\includegraphics[height=0.55\textheight]{./images/dreki_small_tents_snow}
+\end{frame}
+
+\begin{frame}{Lava Flow Landings}
+	\centering
+	\includegraphics[width=0.49\textwidth]{./images/holuhraun_smooth}
+	\includegraphics[width=0.49\textwidth]{./images/holuhraun_rough}
+
+	\href{run:./lava_landing.mp4}{Manual Lava Landing Video}
+\end{frame}
+
+%\section{Moving Forward}
+
+\begin{frame}{Reykjavík University = No-Fly Zone}
+	\centering
+	\includegraphics[height=0.6\textheight]{./images/reykjavik_university_no_fly_zone}
+	\includegraphics[height=0.6\textheight]{./images/ru_aerial.jpg}
+\end{frame}
+
+\begin{frame}{Lava Flow Landing Data Collection Area: Stóra-Bolluhraun}
+	\centering
+	\includegraphics[height=0.8\textheight]{./images/depth_drone_sitting}
+	\includegraphics[height=0.8\textheight]{./images/depth_drone_flying}
+%	\includegraphics[height=0.6\textheight]{./images/depth_processing_screenshot}
+	\\
+	\href{run:./scratch_idea_for_processing_depth_data.mp4}{Video}
+\end{frame}
+
+%\begin{frame}{Example Depth Image Processing}
+%	\centering
+%	\includegraphics[height=\textheight]{./images/depth_processing_screenshot}
+%\end{frame}
+
+\begin{frame}{Moving Forward}
+	\begin{itemize}
+		\item Transform depth image using IMU
+		\item Conventional signal processing techniques
+		\item Possible: Deep learning (embedded TPU/GPU)
+		\item Synthetic data generation using LIDAR point clouds: AirSim
+		\item Analog$^2$ Missions
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Main Messages}
@@ -236,7 +262,7 @@
 	\end{column}
 	\begin{column}{0.6\textwidth}
 	\begin{itemize}
-		\item Topic: autonomous drone control: landing
+		\item Topic: autonomous drone control -- landing
 		\item Methods:
 		\begin{itemize}
 			\item Fiducial markers with camera actuation
@@ -249,10 +275,10 @@
 \end{columns}
 \end{frame}
 
-\begin{frame}{References}
-	\setbeamertemplate{bibliography item}[triangle]
-	\bibliographystyle{plain}
-	\bibliography{references}
-\end{frame}
+%\begin{frame}{References}
+%	\setbeamertemplate{bibliography item}[triangle]
+%	\bibliographystyle{plain}
+%	\bibliography{references}
+%\end{frame}
 
 \end{document}
